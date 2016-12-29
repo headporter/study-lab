@@ -7,7 +7,7 @@ import redis.clients.jedis.*;
 
 public class JedisHelper {
 
-	private static JedisHelper instance;
+	private static JedisHelper instance; // 싱글톤 패턴 적용 (https://wikidocs.net/228)
 	private JedisPool pool;
 
 	private JedisHelper() {
@@ -20,6 +20,7 @@ public class JedisHelper {
  
     	JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         pool = new JedisPool(jedisPoolConfig, prop.getProperty("REDIS_HOST"), Integer.parseInt(prop.getProperty("REDIS_PORT")), 5000);
+		
 	}
 
 	public static synchronized JedisHelper getInstance () {
